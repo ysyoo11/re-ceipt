@@ -13,6 +13,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@backend/*": ["src/backend/*"],
+      "@frontend/*": ["src/frontend/*"],
+      "@pages/*": ["src/pages/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "$src/*": ["src/*"]
+    },
     "importsNotUsedAsValues": "error",
     "incremental": true,
     "sourceMap": true

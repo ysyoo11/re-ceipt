@@ -1,7 +1,11 @@
 module.exports = {
-  content: ["./src/pages/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
+  content: ['./src/pages/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: "'Inter'",
+      },
+    },
   },
   plugins: [],
 };
