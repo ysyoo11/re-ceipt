@@ -5,8 +5,63 @@
     @apply h-full;
   }
 
+  html:lang(ko) .text-xs {
+    line-height: 1.25rem;
+    letter-spacing: -0.0312rem;
+  }
+
+  html:lang(ko) .text-sm {
+    line-height: 1.375rem;
+    letter-spacing: -0.0312rem;
+  }
+
+  html:lang(ko) .text-base .text-lg {
+    line-height: 1.625rem;
+    letter-spacing: -0.0312rem;
+  }
+
+  html:lang(ko) .text-xl {
+    line-height: 1.75rem;
+    letter-spacing: -0.0312rem;
+  }
+
+  html:lang(ko) .text-2xl {
+    line-height: 2rem;
+    letter-spacing: -0.0312rem;
+  }
+
+  html:lang(ko) .text-2xl-s .text-3xl {
+    line-height: 2.25rem;
+    letter-spacing: -0.05rem;
+  }
+
+  html:lang(ko) .text-4xl {
+    line-height: 3rem;
+    letter-spacing: -0.0937rem;
+  }
+
+  html:lang(ko) .text-4xl-s {
+    line-height: 3.25rem;
+    letter-spacing: -0.125rem;
+  }
+
+  html:lang(ko) .text-5xl {
+    line-height: 3.75rem;
+    letter-spacing: -0.125rem;
+  }
+
+  html:lang(ko) .text-6xl {
+    line-height: 4.875rem;
+    letter-spacing: -0.125rem;
+  }
+
+  html:lang(ko) .text-7xl {
+    line-height: 6rem;
+    letter-spacing: -0.125rem;
+  }
+
   body {
-    @apply relative h-full text-base text-gray-900;
+    @apply font-noto relative h-full text-base text-gray-900;
   }
 
   #__next {
@@ -18,14 +73,114 @@
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
   }
 
-  [type="checkbox"] {
+  [type='checkbox'] {
     @apply text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
   }
 
-  [type="radio"] {
+  [type='radio'] {
     @apply border-gray-400 text-blue-400 focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
+  }
+
+  .blur-sm-light {
+    @apply backdrop-blur-sm;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .blur-md-light {
+    @apply backdrop-blur-md;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .blur-lg-light {
+    @apply backdrop-blur-lg;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .blur-xl-light {
+    @apply backdrop-blur-xl;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .blur-sm-dark {
+    @apply backdrop-blur-sm;
+    background: rgba(52, 64, 84, 0.6);
+  }
+  .blur-md-dark {
+    @apply backdrop-blur-md;
+    background: rgba(52, 64, 84, 0.6);
+  }
+  .blur-lg-dark {
+    @apply backdrop-blur-lg;
+    background: rgba(52, 64, 84, 0.6);
+  }
+  .blur-xl-dark {
+    @apply backdrop-blur-xl;
+    background: rgba(52, 64, 84, 0.6);
+  }
+}
+
+.keen-slider .keen-slider__slide {
+  width: 290px;
+}
+
+.slider-left {
+  animation: slideToLeftMobile 70s linear infinite;
+}
+
+.slider-right {
+  animation: slideToRightMobile 65s linear infinite;
+}
+
+.slider-left2 {
+  animation: slideToLeftMobile 75s linear infinite;
+}
+
+@media (min-width: 1024px) {
+  .slider-left {
+    animation: slideToLeftDesktop 70s linear infinite;
+  }
+
+  .slider-right {
+    animation: slideToRightDesktop 65s linear infinite;
+  }
+
+  .slider-left2 {
+    animation: slideToLeftDesktop 75s linear infinite;
+  }
+}
+
+@keyframes slideToLeftMobile {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideToRightMobile {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideToLeftDesktop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideToRightDesktop {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }
 
 @tailwind components;
+
 @tailwind utilities;

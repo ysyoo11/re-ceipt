@@ -1,11 +1,94 @@
+const config = require("tailwindcss/defaultTheme");
+
 module.exports = {
-  content: ['./src/pages/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}'],
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./src/frontend/components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
+    fontFamily: {
+      noto: ["Noto Sans KR", ...config.fontFamily["sans"]],
+      poppins: ["Poppins", ...config.fontFamily["sans"]],
+    },
+    boxShadow: {
+      xs: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+      sm: "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06)",
+      md: "0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06)",
+      lg: "0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)",
+      xl: "0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03)",
+      "2xl": "0px 24px 48px -12px rgba(16, 24, 40, 0.18)",
+      "3xl": "0px 32px 64px -12px rgba(16, 24, 40, 0.14)",
+    },
+    backdropBlur: {
+      sm: "8px",
+      md: "16px",
+      lg: "24px",
+      xl: "40px",
+    },
     extend: {
-      fontFamily: {
-        inter: "'Inter'",
+      fontSize: {
+        xs: ["0.75rem", "1.125rem"],
+        sm: ["0.875rem", "1.375rem"],
+        "2xl-s": ["1.75rem", "2.25rem"],
+        "4xl-s": ["2.5rem", "3rem"],
+        "btn-sm": ["0.875rem", "0.7rem"],
+        "btn-base": ["1rem", "0.8rem"],
+        "btn-lg": ["1.125rem", "0.9rem"],
+        "btn-xl": ["1.25rem", "1rem"],
+      },
+      colors: {
+        "cox-light-blue": {
+          100: "#EBF6F9",
+          200: "#C4E4ED",
+          300: "#9DD2E1",
+          400: "#76BFD5",
+          500: "#51AECA",
+          600: "#3694B0",
+          700: "#1F7893",
+          800: "#0A5D76",
+          900: "#023A4B",
+        },
+        "cox-deep-blue": {
+          100: "#E9ECFC",
+          200: "#BCC5F6",
+          300: "#8F9EEF",
+          400: "#6377E9",
+          500: "#3650E3",
+          600: "#1C36C9",
+          700: "#162A9D",
+          800: "#101E70",
+          900: "#0D195D",
+        },
+        "cox-soft-blue": {
+          100: "#E5EBFF",
+          200: "#B2C4FF",
+          300: "#809DFF",
+          400: "#4B75FF",
+          500: "#194FFF",
+          600: "#0036E5",
+          700: "#002AB2",
+          800: "#001E80",
+          900: "#00124C",
+        },
+        "cox-light-red": {
+          100: "#FFE7E5",
+          200: "#FFB6B3",
+          300: "#FF8580",
+          400: "#FF544C",
+          500: "#F42D25",
+          600: "#CF1E17",
+          700: "#98201B",
+          800: "#661D19",
+          900: "#4D0300",
+        },
+        system: {
+          error: "#FF8580",
+          warning: "#FFC24C",
+          success: "#3CDCBA",
+          link: "#6071EC",
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };
