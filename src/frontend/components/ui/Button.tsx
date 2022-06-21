@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 
-import type { Props, __ } from '@types';
-
 import { forwardRefWithAs } from '@utils/forward-ref-with-as';
 
+import type { Props, __ } from '@types';
 import type { ElementType, Ref } from 'react';
 
 const DEFAULT_BUTTON_TAG = 'button' as const;
@@ -11,7 +10,7 @@ const DEFAULT_BUTTON_TAG = 'button' as const;
 const colorClasses = {
   blue: 'bg-blue-400 hover:bg-blue-500 border-transparent',
   red: 'bg-red-400 hover:bg-red-500 focus-visible:ring-red-500 border-transparent',
-  white: 'bg-white hover:bg-gray-50 border-gray-300',
+  white: 'bg-white hover:bg-gray-50 border-gray-300 text-gray-600',
 };
 
 interface OurButtonProps {
@@ -42,7 +41,7 @@ const ButtonWithRef = forwardRefWithAs(function Button<
     <Component
       className={clsx(
         className,
-        'inline-flex items-center rounded-md border px-4 py-2 font-semibold shadow-sm',
+        'inline-flex items-center rounded-md border px-4 py-2 font-medium shadow-sm',
         {
           'text-sm': size === 'sm',
           'text-base': size === 'base',
