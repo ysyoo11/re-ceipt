@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
-import EnterLayout from '@frontend/components/layout/Enter';
+import { EnterLayout } from '@frontend/components/layout';
 import { Button, Input } from '@frontend/components/ui';
 
 export default function EnterPage() {
