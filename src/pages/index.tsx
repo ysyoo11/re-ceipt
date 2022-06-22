@@ -35,6 +35,20 @@ export default function IndexPage() {
       .finally(() => setLoading(false));
   }, [selectedFile]);
 
+  const handleDownloadClick = useCallback(() => {
+    if (selectedFile == null) return;
+
+    const shareData = { files: [selectedFile] };
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
+
+    if (isMobile) {
+      navigator.share(shareData);
+    } else {
+      downloadImage(preview, fileName);
+    }
+  }, [selectedFile, fileName, preview]);
+
   useEffect(() => {
     showPreview();
   }, [showPreview]);
@@ -107,9 +121,7 @@ export default function IndexPage() {
       </div>
 
       <Button
-        onClick={() => {
-          downloadImage(preview, fileName);
-        }}
+        onClick={handleDownloadClick}
         color="deep-blue"
         disabled={selectedFile && preview && date ? false : true}
         full
