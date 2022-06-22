@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useCallback, useState } from 'react';
 
 import { Button, Input } from '@frontend/components/ui';
+import { useNoti } from '@frontend/hooks/use-noti';
 import { useUser } from '@frontend/hooks/use-user';
 
 interface Props {
@@ -14,11 +15,16 @@ export default function EditNameModal({ open, onClose }: Props) {
 
   const { editName, mutate } = useUser();
 
+  const { showNoti } = useNoti();
+
   const handleNameEdit = useCallback(() => {
     editName(newName);
     mutate();
+    showNoti({
+      title: `Your name has been updated to ${newName}!`,
+    });
     onClose();
-  }, [editName, newName, onClose, mutate]);
+  }, [editName, showNoti, newName, onClose, mutate]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
