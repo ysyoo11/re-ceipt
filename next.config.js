@@ -17,6 +17,7 @@ const securityHeaders = [
       `script-src 'self' 'unsafe-eval' 'unsafe-inline'`,
       `object-src 'self'`,
       `img-src 'self' blob: data:;`,
+      `worker-src 'self' blob:;`,
     ].join(';'),
   },
 ];
