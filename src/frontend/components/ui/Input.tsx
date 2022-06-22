@@ -54,14 +54,14 @@ export default function Input({
           )}
         </label>
       )}
-      <div className="relative mt-4 rounded-md shadow-sm">
+      <div className="relative mt-4 rounded-xl shadow-sm">
         <input
           ref={ref}
           type={type ?? 'text'}
           name={name}
           className={clsx(
             className,
-            'block w-full rounded-md pr-10 text-base focus:outline-none',
+            'block w-full rounded-xl pr-10 text-base focus:outline-none',
             {
               [colorClasses[color]]: !error,
               'border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500':
