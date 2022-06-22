@@ -46,11 +46,13 @@ export default function IndexPage() {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
-    if (isMobile) {
-      navigator.share(shareData);
-    } else {
-      downloadImage(preview, fileName);
-    }
+    downloadImage(preview, fileName);
+
+    // if (isMobile) {
+    //   navigator.share(shareData);
+    // } else {
+    //   downloadImage(preview, fileName);
+    // }
   }, [selectedFile, fileName, preview]);
 
   useEffect(() => {
