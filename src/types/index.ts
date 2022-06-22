@@ -69,3 +69,6 @@ export type EncodeId<T> = T extends ObjectWithId
 
 type ObjectWithId = { _id: any };
 type Unpacked<T> = T extends (infer U)[] ? U : T;
+
+export const categories = ['점심식대', '회의비', '택시비'] as const;
+export type Category = typeof categories[number];
