@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from '@heroicons/react/solid';
 import NextImage from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -46,13 +47,11 @@ export default function IndexPage() {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
-    downloadImage(preview, fileName);
-
-    // if (isMobile) {
-    //   navigator.share(shareData);
-    // } else {
-    //   downloadImage(preview, fileName);
-    // }
+    if (isMobile) {
+      navigator.share(shareData);
+    } else {
+      downloadImage(preview, fileName);
+    }
   }, [selectedFile, fileName, preview]);
 
   useEffect(() => {
@@ -134,6 +133,17 @@ export default function IndexPage() {
       >
         다운로드
       </Button>
+      <div className="flex justify-end pr-2">
+        <a
+          href="https://flex.team/workflow/archive/my"
+          className="group flex items-center space-x-1 font-semibold text-system-link hover:text-cox-deep-blue-600"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>Flex 바로가기</span>
+          <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </a>
+      </div>
     </section>
   );
 }
