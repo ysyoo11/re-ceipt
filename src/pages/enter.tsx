@@ -1,18 +1,18 @@
-import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
 import { EnterLayout } from '@frontend/components/layout';
 import { Button, Input } from '@frontend/components/ui';
+import { useUser } from '@frontend/hooks/use-user';
 
 export default function EnterPage() {
   const [name, setName] = useState('');
 
-  const router = useRouter();
+  const { mutate } = useUser();
 
   const handleConfirm = useCallback(() => {
     window.localStorage.setItem('@username', name);
-    router.push('/');
-  }, [name, router]);
+    mutate();
+  }, [name, mutate]);
 
   return (
     <div className="flex h-full min-h-screen w-full flex-col justify-center bg-cox-deep-blue-900 px-4">

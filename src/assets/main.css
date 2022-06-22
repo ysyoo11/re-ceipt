@@ -61,7 +61,7 @@
   }
 
   body {
-    @apply font-noto relative h-full text-base text-gray-900;
+    @apply relative h-full font-noto text-base text-gray-900;
   }
 
   #__next {

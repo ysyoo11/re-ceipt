@@ -17,7 +17,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <Header />
-      <main className="relative mx-auto h-full w-full max-w-sm">{children}</main>
+      <main className="mx-auto h-full w-full max-w-sm px-4">{children}</main>
     </>
   );
 }

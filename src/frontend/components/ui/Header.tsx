@@ -17,7 +17,7 @@ export default function Header() {
           <div className="flex items-center space-x-1.5 text-gray-700">
             <span>{user}</span>
             <button onClick={() => setShowModal(true)}>
-              <PencilIcon className="h-4 w-4" />
+              <PencilIcon className="h-4 w-4 text-system-link" />
             </button>
           </div>
         </div>
