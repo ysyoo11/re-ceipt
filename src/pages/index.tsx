@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Loading from '@frontend/components/core/Loading';
 import { Button, Listbox } from '@frontend/components/ui';
+import { useNoti } from '@frontend/hooks/use-noti';
 import { useUser } from '@frontend/hooks/use-user';
 import { getTodayDate } from '@utils/get-today-date';
 import { downloadImage, getImageUrl } from '@utils/image';
@@ -22,6 +23,8 @@ export default function IndexPage() {
   const [fileName, setFileName] = useState(`${user}_${parsedDate}_${category}.jpg`);
   const [loading, setLoading] = useState(false);
 
+  const { showAlert } = useNoti();
+
   const showPreview = useCallback(async () => {
     if (!selectedFile) {
       setPreview('');
@@ -38,7 +41,8 @@ export default function IndexPage() {
   const handleDownloadClick = useCallback(() => {
     if (selectedFile == null) return;
 
-    const shareData = { files: [selectedFile] };
+    const renamedFile = new File([selectedFile], fileName);
+    const shareData = { files: [renamedFile] };
     const userAgent = navigator.userAgent || navigator.vendor;
     const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
@@ -58,7 +62,7 @@ export default function IndexPage() {
   }, [user, parsedDate, category]);
 
   return (
-    <section className="mt-6 h-full w-full space-y-4">
+    <section className="mt-6 h-full w-full space-y-4 pb-40">
       <label htmlFor="image" className="h-full w-full font-medium">
         Image:
         {selectedFile && preview && !loading ? (
