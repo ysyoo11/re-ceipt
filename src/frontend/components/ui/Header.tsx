@@ -16,7 +16,7 @@ export default function Header() {
           <h1 className="text-xl font-semibold text-gray-800">Re:ceipt</h1>
           <div className="flex items-center space-x-1.5 text-gray-700">
             <span>{user}</span>
-            <button onClick={() => setShowModal(true)}>
+            <button onClick={() => setShowModal(true)} aria-label="Edit name">
               <PencilIcon className="h-4 w-4 text-system-link" />
             </button>
           </div>

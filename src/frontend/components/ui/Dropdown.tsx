@@ -44,6 +44,7 @@ export default function Dropdown({ button, dropdownItems }: DropdownProps) {
                         'flex w-full items-center px-4 py-2 text-sm',
                       )}
                       onClick={onClick}
+                      aria-label="Open dropdown"
                     >
                       {icon}
                       <span className={clsx({ 'ml-3': icon !== undefined })}>{label}</span>

@@ -59,10 +59,10 @@ export default function EditNameModal({ open, onClose }: Props) {
               <h6 className="text-xl font-medium">Edit name</h6>
               <Input onChange={(e) => setNewName(e.target.value)} placeholder="변경할 이름" />
               <div className="mt-4 flex space-x-2">
-                <Button onClick={onClose} color="white" full>
+                <Button onClick={onClose} color="white" full aria-label="Cancel">
                   취소
                 </Button>
-                <Button onClick={handleNameEdit} full>
+                <Button onClick={handleNameEdit} full aria-label="Confirm">
                   확인
                 </Button>
               </div>

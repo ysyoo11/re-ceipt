@@ -20,7 +20,7 @@ export default function EnterPage() {
         <p className="text-center text-xl font-medium text-white">성함을 입력해주세요.</p>
         <div className="space-y-2">
           <Input onChange={(e) => setName(e.target.value)} placeholder="홍길동" />
-          <Button onClick={handleConfirm} full>
+          <Button onClick={handleConfirm} full aria-label="Confirm">
             확인
           </Button>
         </div>

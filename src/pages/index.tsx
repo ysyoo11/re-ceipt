@@ -78,7 +78,7 @@ export default function IndexPage() {
             <Loading />
           </div>
         ) : null}
-        <span className="mt-2 block w-full cursor-pointer rounded-xl bg-cox-light-blue-500 py-2 text-center text-white">
+        <span className="mt-2 block w-full cursor-pointer rounded-xl bg-cox-light-blue-600 py-2 text-center text-white hover:text-cox-light-blue-700">
           이미지 파일 선택
         </span>
         <input
@@ -128,6 +128,7 @@ export default function IndexPage() {
         color="deep-blue"
         disabled={selectedFile && preview && date ? false : true}
         full
+        aria-label="Download"
       >
         다운로드
       </Button>

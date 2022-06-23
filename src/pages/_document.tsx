@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="ko">
         <Head>
           <meta name="application-name" content="Re:ceipt" />
           <meta name="apple-mobile-web-app-capable" content="yes" />

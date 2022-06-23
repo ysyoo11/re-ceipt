@@ -120,6 +120,7 @@ export default function Modal({
                     await actionButton.onClick();
                     close();
                   }}
+                  aria-label="Action"
                 >
                   {actionButton.label}
                 </button>
@@ -137,6 +138,7 @@ export default function Modal({
                       if (cancelButton?.onClick) await cancelButton.onClick();
                       close();
                     }}
+                    aria-label="Cancel"
                   >
                     {cancelButton.label}
                   </button>

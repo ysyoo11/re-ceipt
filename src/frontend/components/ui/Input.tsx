@@ -103,6 +103,7 @@ export default function Input({
               e.preventDefault();
               if (clear) clear();
             }}
+            aria-label="Erase"
           >
             <XIcon
               className={clsx('h-5 w-5', {
