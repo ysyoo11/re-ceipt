@@ -1,32 +1,16 @@
-// @ts-check
-
 const { StatusCodes } = require('http-status-codes');
-
-// const securityHeaders = [
-//   {
-//     key: 'X-XSS-Protection',
-//     value: '1; mode=block',
-//   },
-//   {
-//     key: 'Content-Security-Policy',
-//     value: [
-//       `default-src 'self'`,
-//       `base-uri 'self'`,
-//       `style-src 'self' fonts.googleapis.com 'unsafe-inline'`,
-//       `font-src 'self' fonts.gstatic.com`,
-//       `script-src 'self' 'unsafe-eval' 'unsafe-inline'`,
-//       `object-src 'self'`,
-//       `img-src 'self' blob: data:;`,
-//       `worker-src 'self' blob:;`,
-//       ,
-//     ].join(';'),
-//   },
-// ];
+const withPWA = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache');
 
 /**
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
+  pwa: {
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development',
+  },
+  runtimeCaching,
   async redirects() {
     return [
       {
@@ -39,4 +23,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);
