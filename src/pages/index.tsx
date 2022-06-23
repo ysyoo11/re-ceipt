@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Loading from '@frontend/components/core/Loading';
 import { Button, Listbox } from '@frontend/components/ui';
-import { useNoti } from '@frontend/hooks/use-noti';
 import { useUser } from '@frontend/hooks/use-user';
 import { getTodayDate } from '@utils/get-today-date';
 import { downloadImage, getImageUrl } from '@utils/image';
@@ -24,8 +23,6 @@ export default function IndexPage() {
   const [fileName, setFileName] = useState(`${user}_${parsedDate}_${category}.jpg`);
   const [loading, setLoading] = useState(false);
 
-  const { showAlert } = useNoti();
-
   const showPreview = useCallback(async () => {
     if (!selectedFile) {
       setPreview('');
@@ -43,15 +40,17 @@ export default function IndexPage() {
     if (selectedFile == null) return;
 
     const renamedFile = new File([selectedFile], fileName);
-    const shareData = { files: [renamedFile] };
+    const shareData = { files: [renamedFile], title: fileName };
+    const canShare = navigator.canShare && navigator.canShare(shareData);
     const userAgent = navigator.userAgent || navigator.vendor;
     const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
-    if (isMobile) {
-      navigator.share(shareData);
-    } else {
-      downloadImage(preview, fileName);
-    }
+    // if (canShare && isMobile) {
+    //   navigator.share(shareData);
+    // } else {
+    //   downloadImage(preview, fileName);
+    // }
+    downloadImage(preview, fileName);
   }, [selectedFile, fileName, preview]);
 
   useEffect(() => {
