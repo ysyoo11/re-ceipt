@@ -6,9 +6,7 @@ export function useUser() {
     return window.localStorage.getItem('@username');
   }, []);
 
-  const editName = useCallback(async (name) => {
-    if (name.length > 4) return new Error('Your name should be less than 5 letters');
-
+  const editName = useCallback((name) => {
     window.localStorage.setItem('@username', name);
   }, []);
 

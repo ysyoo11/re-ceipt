@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 
 import { Button, Input } from '@frontend/components/ui';
 import { useNoti } from '@frontend/hooks/use-noti';
@@ -12,22 +12,25 @@ interface Props {
 
 export default function EditNameModal({ open, onClose }: Props) {
   const [newName, setNewName] = useState('');
+  const [error, setError] = useState(false);
 
   const { editName, mutate } = useUser();
 
-  const { showNoti, showAlert } = useNoti();
+  const { showNoti } = useNoti();
 
   const handleNameEdit = useCallback(() => {
-    editName(newName)
-      .then(() => {
-        showNoti({
-          title: `Your name has been updated to ${newName}!`,
-        });
-        mutate();
-        onClose();
-      })
-      .catch((err) => showAlert(err));
-  }, [editName, showNoti, showAlert, newName, onClose, mutate]);
+    editName(newName);
+    showNoti({
+      title: `Your name has been updated to ${newName}!`,
+    });
+    mutate();
+    onClose();
+  }, [editName, showNoti, newName, onClose, mutate]);
+
+  useEffect(() => {
+    if (newName.length > 4) setError(true);
+    else setError(false);
+  }, [newName]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -60,12 +63,23 @@ export default function EditNameModal({ open, onClose }: Props) {
           >
             <div className="inline-block w-full max-w-sm transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
               <h6 className="text-xl font-medium">Edit name</h6>
-              <Input onChange={(e) => setNewName(e.target.value)} placeholder="변경할 이름" />
+              <Input
+                onChange={(e) => {
+                  setNewName(e.target.value);
+                }}
+                placeholder="변경할 이름"
+                error={error}
+              />
+              {error ? (
+                <p className="text-base text-system-error sm:text-sm">
+                  Your name should be less than 5 letters.
+                </p>
+              ) : null}
               <div className="mt-4 flex space-x-2">
                 <Button onClick={onClose} color="white" full aria-label="Cancel">
                   취소
                 </Button>
-                <Button onClick={handleNameEdit} full aria-label="Confirm">
+                <Button onClick={handleNameEdit} full aria-label="Confirm" disabled={error}>
                   확인
                 </Button>
               </div>
