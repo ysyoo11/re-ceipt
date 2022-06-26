@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Loading from '@frontend/components/core/Loading';
 import { Button, Listbox } from '@frontend/components/ui';
+import { useNoti } from '@frontend/hooks/use-noti';
 import { useUser } from '@frontend/hooks/use-user';
 import { isIos } from '@utils/browser';
 import { getTodayDate } from '@utils/get-today-date';
@@ -23,6 +24,8 @@ export default function IndexPage() {
   const [category, setCategory] = useState<Category>('점심식대');
   const [fileName, setFileName] = useState(`${user}_${parsedDate}_${category}.jpg`);
   const [loading, setLoading] = useState(false);
+
+  const { showAlert } = useNoti();
 
   const showPreview = useCallback(async () => {
     if (!selectedFile) {
@@ -108,7 +111,13 @@ export default function IndexPage() {
           name="date"
           type="date"
           max={today}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value > today) {
+              showAlert({ name: 'Wrong Date', message: 'Please check the selected date again.' });
+              return;
+            }
+            setDate(e.target.value);
+          }}
           value={date}
           className="datepicker-input h-10 w-full rounded-xl border border-gray-400 focus:outline-none focus-visible:border-cox-light-blue-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-cox-light-blue-500 sm:text-sm"
         />
