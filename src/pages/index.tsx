@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Loading from '@frontend/components/core/Loading';
 import { Button, Listbox } from '@frontend/components/ui';
 import { useUser } from '@frontend/hooks/use-user';
+import { isIos } from '@utils/browser';
 import { getTodayDate } from '@utils/get-today-date';
 import { downloadImage, getImageUrl } from '@utils/image';
 
@@ -42,10 +43,8 @@ export default function IndexPage() {
     const renamedFile = new File([selectedFile], fileName);
     const shareData = { files: [renamedFile], title: fileName };
     const canShare = navigator.canShare && navigator.canShare(shareData);
-    const userAgent = navigator.userAgent || navigator.vendor;
-    const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
-    if (canShare && isMobile) {
+    if (canShare && isIos()) {
       await navigator.share(shareData).catch((err) => alert(err));
     } else {
       downloadImage(preview, fileName);
