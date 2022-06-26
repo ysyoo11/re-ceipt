@@ -6,7 +6,7 @@ import Loading from '@frontend/components/core/Loading';
 import { Button, Listbox } from '@frontend/components/ui';
 import { useUser } from '@frontend/hooks/use-user';
 import { getTodayDate } from '@utils/get-today-date';
-import { downloadImage, getImageUrl } from '@utils/image';
+import { getImageUrl } from '@utils/image';
 
 import type { Category } from '@types';
 
@@ -24,6 +24,7 @@ export default function IndexPage() {
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [canShare, setCanShare] = useState(false);
+  const [error, setError] = useState('');
 
   const showPreview = useCallback(async () => {
     if (!selectedFile) {
@@ -38,7 +39,7 @@ export default function IndexPage() {
       .finally(() => setLoading(false));
   }, [selectedFile]);
 
-  const handleDownloadClick = useCallback(() => {
+  const handleDownloadClick = useCallback(async () => {
     if (selectedFile == null) return;
 
     const renamedFile = new File([selectedFile], fileName);
@@ -47,12 +48,13 @@ export default function IndexPage() {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
 
-    if (canShare && isMobile) {
-      navigator.share(shareData);
-    } else {
-      downloadImage(preview, fileName);
-    }
-  }, [selectedFile, fileName, preview]);
+    await navigator.share(shareData).catch((err) => setError(err.message));
+    // if (canShare && isMobile) {
+    //   await navigator.share(shareData).catch((err) => setError(err.message));
+    // } else {
+    //   downloadImage(preview, fileName);
+    // }
+  }, [selectedFile, fileName]);
 
   useEffect(() => {
     if (selectedFile == null) return;
@@ -78,6 +80,10 @@ export default function IndexPage() {
   useEffect(() => {
     setFileName(`${user}_${parsedDate}_${category}.jpg`);
   }, [user, parsedDate, category]);
+
+  if (error !== '') {
+    return <div>{error}</div>;
+  }
 
   return (
     <section className="mt-6 h-full w-full space-y-4 pb-40">
