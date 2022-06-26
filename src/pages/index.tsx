@@ -44,7 +44,7 @@ export default function IndexPage() {
     if (selectedFile == null) return;
 
     const renamedFile = new File([selectedFile], fileName);
-    const shareData = { files: [renamedFile], title: fileName };
+    const shareData = { files: [renamedFile] };
     const canShare = navigator.canShare && navigator.canShare(shareData);
 
     if (canShare && isIos()) {
