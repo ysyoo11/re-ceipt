@@ -45,7 +45,11 @@ export default function IndexPage() {
     const canShare = navigator.canShare && navigator.canShare(shareData);
 
     if (canShare && isIos()) {
-      await navigator.share(shareData).catch((err) => alert(err));
+      await navigator.share(shareData).catch((err) => {
+        if (err.toString().includes('NotAllowedError')) {
+          window.location.reload();
+        }
+      });
     } else {
       downloadImage(preview, fileName);
     }
