@@ -22,6 +22,8 @@ export default function IndexPage() {
   const [category, setCategory] = useState<Category>('점심식대');
   const [fileName, setFileName] = useState(`${user}_${parsedDate}_${category}.jpg`);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [canShare, setCanShare] = useState(false);
 
   const showPreview = useCallback(async () => {
     if (!selectedFile) {
@@ -53,6 +55,23 @@ export default function IndexPage() {
   }, [selectedFile, fileName, preview]);
 
   useEffect(() => {
+    if (selectedFile == null) return;
+
+    const renamedFile = new File([selectedFile], fileName);
+    const shareData = { files: [renamedFile], title: fileName };
+    const canShare = navigator.canShare && navigator.canShare(shareData);
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent);
+
+    if (isMobile) {
+      setIsMobile(true);
+    }
+    if (canShare) {
+      setCanShare(true);
+    }
+  }, [fileName, selectedFile]);
+
+  useEffect(() => {
     showPreview();
   }, [showPreview]);
 
@@ -64,6 +83,8 @@ export default function IndexPage() {
     <section className="mt-6 h-full w-full space-y-4 pb-40">
       <label htmlFor="image" className="h-full w-full font-medium">
         Image:
+        <div>isMobile: {isMobile.toString()}</div>
+        <div>canShare: {canShare.toString()}</div>
         {selectedFile && preview && !loading ? (
           <div className="relative h-full w-full" style={{ maxHeight: '50%' }}>
             <NextImage
