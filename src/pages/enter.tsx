@@ -42,6 +42,7 @@ export default function EnterPage() {
             full
             aria-label="Confirm"
             disabled={name.length == 0 || error}
+            color="deep-blue"
           >
             확인
           </Button>
