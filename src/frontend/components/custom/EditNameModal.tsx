@@ -18,12 +18,15 @@ export default function EditNameModal({ open, onClose }: Props) {
   const { showNoti, showAlert } = useNoti();
 
   const handleNameEdit = useCallback(() => {
-    editName(newName).catch((err) => showAlert(err));
-    mutate();
-    showNoti({
-      title: `Your name has been updated to ${newName}!`,
-    });
-    onClose();
+    editName(newName)
+      .then(() => {
+        showNoti({
+          title: `Your name has been updated to ${newName}!`,
+        });
+        mutate();
+        onClose();
+      })
+      .catch((err) => showAlert(err));
   }, [editName, showNoti, showAlert, newName, onClose, mutate]);
 
   return (
