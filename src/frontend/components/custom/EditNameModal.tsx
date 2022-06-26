@@ -15,16 +15,16 @@ export default function EditNameModal({ open, onClose }: Props) {
 
   const { editName, mutate } = useUser();
 
-  const { showNoti } = useNoti();
+  const { showNoti, showAlert } = useNoti();
 
   const handleNameEdit = useCallback(() => {
-    editName(newName);
+    editName(newName).catch((err) => showAlert(err));
     mutate();
     showNoti({
       title: `Your name has been updated to ${newName}!`,
     });
     onClose();
-  }, [editName, showNoti, newName, onClose, mutate]);
+  }, [editName, showNoti, showAlert, newName, onClose, mutate]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
