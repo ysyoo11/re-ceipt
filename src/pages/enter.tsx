@@ -25,8 +25,8 @@ export default function EnterPage() {
   }, [name]);
 
   return (
-    <div className="relative flex h-full min-h-screen w-full flex-col justify-center px-4">
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 space-y-2 text-center">
+    <div className="relative flex h-full min-h-screen w-full flex-col justify-center space-y-14 px-4">
+      <div className="flex flex-col items-center space-y-2">
         <Logo className="w-48" />
         <h1 className="text-4xl font-bold">Re:ceipt</h1>
       </div>
